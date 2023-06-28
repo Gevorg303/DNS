@@ -7,14 +7,18 @@ public class DNSOnlineStore {
     private final PurchaseHistoryHolder purchaseHistoryHolder;
     private final ShoppingCartHolder shoppingCartHolder;
     private final UserHolder userHolder;
+    private final PriceList discountedPriceList;
+    private final PriceList regularPriceList;
 
     public DNSOnlineStore() {
         this.productHolder = new ProductHolder();
         this.purchaseHistoryHolder = new PurchaseHistoryHolder(productHolder);
+        this.discountedPriceList=new PriceList();
+        this.regularPriceList=new PriceList();
         this.shoppingCartHolder = new ShoppingCartHolder(productHolder);
         this.userHolder = new UserHolder();
-    }
 
+    }
     public ProductHolder getProductHolder() {
         return productHolder;
     }
@@ -69,5 +73,25 @@ public class DNSOnlineStore {
 
     public void removeProductCart(String idProduct) {
         getShoppingCartHolder().removeProductShoppingCart(idProduct);
+    }
+
+    public void addProductRegularPriceList(ProductPrice productPrice) {
+        getRegularPriceList().addProductPrice(productPrice);
+    }
+
+    public PriceList getDiscountedPriceList() {
+        return discountedPriceList;
+    }
+
+    public PriceList getRegularPriceList() {
+        return regularPriceList;
+    }
+
+    public double calculateCartPrice(PriceList priceList) {
+        return shoppingCartHolder.calculateCartPrice(priceList);
+    }
+
+    public void addProductDiscountedPriceList(ProductPrice productPrice) {
+        getDiscountedPriceList().addProductPrice(productPrice);
     }
 }

@@ -13,9 +13,10 @@ public class ShoppingCartHolder extends ShoppingCart{
                 System.out.println("Товар успешно добавлен в корзину");
                 break;
             }
-            System.out.println("Товар c таким артикулом не найден");
-            break;
+
         }
+        System.out.println("Товар c таким артикулом не найден");
+
     }
     public void removeProductShoppingCart(String idProduct){
         for (Product product: getProductCart()) {
@@ -25,10 +26,16 @@ public class ShoppingCartHolder extends ShoppingCart{
                 break;
             }
             System.out.println("Товар не найден");
-            break;
         }
     }
-
+    public double calculateCartPrice(PriceList priceList){
+        double totalPrice=0.0;
+        for (Product product: getProductCart()){
+            double productPrice=priceList.getProductPrice(product.getIdProduct());
+            totalPrice+=productPrice;
+        }
+        return  totalPrice;
+    }
     public ProductHolder getProductHolder() {
         return productHolder;
     }

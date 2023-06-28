@@ -11,7 +11,7 @@ public class ProductHolder {
     }
     public void addProduct(Product product){/* добавить новый товар */
         getProducts().add(product);
-        System.out.println("Товар успешно добавлен");
+        System.out.println(product.getProductName()+" успешно добавлен");
     }
     public List<Product> printListProduct(){/* вывести список товаров */
         return getProducts();
