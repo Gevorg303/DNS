@@ -11,15 +11,19 @@ public class PriceList {
         this.productPrices = new ArrayList<>();
     }
     public void addProductPrice(ProductPrice productPrice){
-        productPrices.add(productPrice);
-        System.out.println("Товар добавлен в обычный прайс лист"+productPrices.size());
+        getProductPrices().add(productPrice);
+        System.out.println("Товар добавлен в обычный прайс лист");
     }
-    public  double getProductPrice(String idProduct){
-        for(ProductPrice productPrice:productPrices){
+    public double getProductPrice(String idProduct){
+        for(ProductPrice productPrice:getProductPrices()){
             if(Objects.equals(productPrice.getIdProduct(), idProduct)){
                 return  productPrice.getPrice();
             }
         }
         return 0.0;
+    }
+
+    public List<ProductPrice> getProductPrices() {
+        return productPrices;
     }
 }

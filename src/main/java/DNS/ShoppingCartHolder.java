@@ -7,22 +7,25 @@ public class ShoppingCartHolder extends ShoppingCart{
     }
 
     public void addProductShoppingCart(String idProduct){
+        boolean f = false;
         for (Product product:getProductHolder().getProducts()) {
             if (product.getIdProduct().equals(idProduct)){
                 getProductCart().add(product);
-                System.out.println("Товар успешно добавлен в корзину");
+                System.out.println(product.getProductName()+" успешно добавлен в корзину");
+                f = true;
                 break;
             }
-
         }
-        System.out.println("Товар c таким артикулом не найден");
+        if (!f){
+            System.out.println("Товар c таким артикулом не найден");
+        }
 
     }
     public void removeProductShoppingCart(String idProduct){
         for (Product product: getProductCart()) {
             if(product.getIdProduct().equals(idProduct)) {
                 getProductCart().remove(product);
-                System.out.println("Товар успешно удален");
+                System.out.println(product.getProductName()+" успешно удален");
                 break;
             }
             System.out.println("Товар не найден");

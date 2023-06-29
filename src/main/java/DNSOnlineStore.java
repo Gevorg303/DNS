@@ -78,7 +78,6 @@ public class DNSOnlineStore {
     public void addProductRegularPriceList(ProductPrice productPrice) {
         getRegularPriceList().addProductPrice(productPrice);
     }
-
     public PriceList getDiscountedPriceList() {
         return discountedPriceList;
     }
