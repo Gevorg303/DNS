@@ -14,17 +14,9 @@ public class PriceList {
         getProductPrices().add(productPrice);
         System.out.println("Товар добавлен в прайс лист");
     }
-    public double getProductPrice(String idProduct){
-        for(ProductPrice productPrice:getProductPrices()){
-            if(Objects.equals(productPrice.getIdProduct(), idProduct)){
-                return  productPrice.getPrice();
-            }
-        }
-        return 0.0;
-    }
     public double getPriceForProduct(String idProduct){
         for(ProductPrice productPrice: productPrices){
-            if(productPrice.getIdProduct()==idProduct){
+            if(Objects.equals(productPrice.getIdProduct(), idProduct)){
                 return productPrice.getPrice();
             }
         }
