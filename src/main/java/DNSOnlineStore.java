@@ -9,6 +9,7 @@ public class DNSOnlineStore {
     private final UserHolder userHolder;
     private final PriceList discountedPriceList;
     private final PriceList regularPriceList;
+    private final Calculator calculator;
 
     public DNSOnlineStore() {
         this.productHolder = new ProductHolder();
@@ -17,6 +18,7 @@ public class DNSOnlineStore {
         this.regularPriceList=new PriceList();
         this.shoppingCartHolder = new ShoppingCartHolder(productHolder);
         this.userHolder = new UserHolder();
+        this.calculator = new Calculator(shoppingCartHolder);
 
     }
     public ProductHolder getProductHolder() {
@@ -87,7 +89,7 @@ public class DNSOnlineStore {
     }
 
     public double calculateCartPrice(PriceList priceList) {
-        return shoppingCartHolder.calculateCartPrice(priceList);
+        return calculator.calculateCartPrice(priceList);
     }
 
     public void addProductDiscountedPriceList(ProductPrice productPrice) {

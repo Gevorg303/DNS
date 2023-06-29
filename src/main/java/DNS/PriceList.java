@@ -12,12 +12,20 @@ public class PriceList {
     }
     public void addProductPrice(ProductPrice productPrice){
         getProductPrices().add(productPrice);
-        System.out.println("Товар добавлен в обычный прайс лист");
+        System.out.println("Товар добавлен в прайс лист");
     }
     public double getProductPrice(String idProduct){
         for(ProductPrice productPrice:getProductPrices()){
             if(Objects.equals(productPrice.getIdProduct(), idProduct)){
                 return  productPrice.getPrice();
+            }
+        }
+        return 0.0;
+    }
+    public double getPriceForProduct(String idProduct){
+        for(ProductPrice productPrice: productPrices){
+            if(productPrice.getIdProduct()==idProduct){
+                return productPrice.getPrice();
             }
         }
         return 0.0;

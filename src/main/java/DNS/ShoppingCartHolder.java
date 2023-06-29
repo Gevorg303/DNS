@@ -31,14 +31,7 @@ public class ShoppingCartHolder extends ShoppingCart{
             System.out.println("Товар не найден");
         }
     }
-    public double calculateCartPrice(PriceList priceList){
-        double totalPrice=0.0;
-        for (Product product: getProductCart()){
-            double productPrice=priceList.getProductPrice(product.getIdProduct());
-            totalPrice+=productPrice;
-        }
-        return  totalPrice;
-    }
+
     public ProductHolder getProductHolder() {
         return productHolder;
     }
