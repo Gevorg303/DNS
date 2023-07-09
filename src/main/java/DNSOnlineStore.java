@@ -3,7 +3,7 @@ import DNS.*;
 import java.util.List;
 
 public class DNSOnlineStore {
-    private final ProductHolder productHolder;
+    private final Warehouse warehouse;
     private final PurchaseHistoryHolder purchaseHistoryHolder;
     private final ShoppingCartHolder shoppingCartHolder;
     private final UserHolder userHolder;
@@ -12,17 +12,17 @@ public class DNSOnlineStore {
     private final Calculator calculator;
 
     public DNSOnlineStore() {
-        this.productHolder = new ProductHolder();
-        this.purchaseHistoryHolder = new PurchaseHistoryHolder(productHolder);
+        this.warehouse = new Warehouse();
+        this.purchaseHistoryHolder = new PurchaseHistoryHolder();
         this.discountedPriceList=new PriceList();
         this.regularPriceList=new PriceList();
-        this.shoppingCartHolder = new ShoppingCartHolder(productHolder);
+        this.shoppingCartHolder = new ShoppingCartHolder();
         this.userHolder = new UserHolder();
         this.calculator = new Calculator(shoppingCartHolder);
 
     }
-    public ProductHolder getProductHolder() {
-        return productHolder;
+    public Warehouse getWarehouse() {
+        return warehouse;
     }
 
     public PurchaseHistoryHolder getPurchaseHistoryHolder() {
@@ -38,23 +38,23 @@ public class DNSOnlineStore {
     }
 
     public void addProduct(Product product) {
-        getProductHolder().addProduct(product);
+        getWarehouse().addProduct(product);
     }
 
     public List<Product> getProductList() {
-        return getProductHolder().printListProduct();
+        return getWarehouse().printListProduct();
     }
 
-    public void buy(String idProduct) {
-        getPurchaseHistoryHolder().buyProduct(idProduct);
+    public void buy(Product product, Warehouse warehouse) {
+        getPurchaseHistoryHolder().buyProduct(product, warehouse);
     }
 
     public List<Product> getProductHistory() {
         return getPurchaseHistoryHolder().printHistory();
     }
 
-    public void addProductCart(String idProduct) {
-        getShoppingCartHolder().addProductShoppingCart(idProduct);
+    public void addProductCart(Product product, Warehouse warehouse) {
+        getShoppingCartHolder().addProductShoppingCart(product, warehouse);
     }
 
     public void addUser(User user) {
@@ -69,12 +69,12 @@ public class DNSOnlineStore {
         getUserHolder().removeUser(phoneNumber);
     }
 
-    public void printCart() {
-        getShoppingCartHolder().getShoppingCart();
+    public List<Product> printCart() {
+        return getShoppingCartHolder().getShoppingCart().getProductCart();
     }
 
-    public void removeProductCart(String idProduct) {
-        getShoppingCartHolder().removeProductShoppingCart(idProduct);
+    public void removeProductCart(Product product, Warehouse warehouse) {
+        getShoppingCartHolder().removeProductShoppingCart(product, warehouse);
     }
 
     public void addProductRegularPriceList(ProductPrice productPrice) {

@@ -9,7 +9,7 @@ public class ShoppingCart{
         this.productCart = new ArrayList<>();
     }
     public String toString(){
-        return "Корзина покупок: "+productCart;
+        return "Корзина товаров: "+productCart;
     }
     public List<Product> getProductCart() {
         return productCart;

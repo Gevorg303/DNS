@@ -10,7 +10,7 @@ public class Calculator{
     }
     public double calculateCartPrice(PriceList priceList){
         double totalPrice=0.0;
-        List<Product> productList=getShoppingCartHolder().getProductCart();
+        List<Product> productList=getShoppingCartHolder().getShoppingCart().getProductCart();
         for(Product product:productList){
             double price=priceList.getPriceForProduct(product.getIdProduct());
             totalPrice+=price;

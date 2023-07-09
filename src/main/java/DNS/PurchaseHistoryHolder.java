@@ -2,23 +2,25 @@ package DNS;
 
 import java.util.List;
 
-public class PurchaseHistoryHolder extends PurchaseHistory{
-    private final ProductHolder productHolder;
-    public PurchaseHistoryHolder(ProductHolder productHolder) {
-        this.productHolder = productHolder;
+public class PurchaseHistoryHolder{
+    private final PurchaseHistory purchaseHistory;
+    public PurchaseHistoryHolder() {
+        this.purchaseHistory=new PurchaseHistory();
     }
-    public void buyProduct(String idProduct){/* купить товар */
-        for (Product product:productHolder.getProducts()){
-            if(product.getIdProduct().equals(idProduct)){
-                getProductList().add(product);
-                System.out.println("Поздравляю с покупкой!");
-                break;
-            }
-            System.out.println( "Товар с таким артикулом не найден");
-            break;
+    public void buyProduct(Product product, Warehouse warehouse){/* купить товар */
+        if(warehouse.productSearch(product.getIdProduct())){
+            getPurchaseHistory().getProductList().add(product);
+            System.out.println("Поздравляю с покупкой!");
+        }else {
+            System.out.println("Товар с таким артикулом на складе не найден");
         }
+
     }
     public List<Product> printHistory(){
-        return getProductList();
+        return getPurchaseHistory().getProductList();
+    }
+
+    public PurchaseHistory getPurchaseHistory() {
+        return purchaseHistory;
     }
 }

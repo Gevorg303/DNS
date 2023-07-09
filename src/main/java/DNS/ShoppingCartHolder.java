@@ -1,42 +1,29 @@
 package DNS;
 
-public class ShoppingCartHolder extends ShoppingCart{
-    private final ProductHolder productHolder;
-    public ShoppingCartHolder(ProductHolder productHolder) {
-        this.productHolder = productHolder;
+public class ShoppingCartHolder{
+    private final ShoppingCart shoppingCart;
+    public ShoppingCartHolder() {
+        this.shoppingCart= new ShoppingCart();
     }
 
-    public void addProductShoppingCart(String idProduct){
-        boolean f = false;
-        for (Product product:getProductHolder().getProducts()) {
-            if (product.getIdProduct().equals(idProduct)){
-                getProductCart().add(product);
-                System.out.println(product.getProductName()+" успешно добавлен в корзину");
-                f = true;
-                break;
-            }
+    public void addProductShoppingCart(Product product, Warehouse warehouse){
+        if(warehouse.productSearch(product.getIdProduct())){
+            getShoppingCart().getProductCart().add(product);
+            System.out.println(product.getProductName()+" успешно добавлен в корзину");
+        }else {
+            System.out.println("Товар с таким артикулом на складе не найден");
         }
-        if (!f){
-            System.out.println("Товар c таким артикулом не найден");
-        }
-
     }
-    public void removeProductShoppingCart(String idProduct){
-        for (Product product: getProductCart()) {
-            if(product.getIdProduct().equals(idProduct)) {
-                getProductCart().remove(product);
-                System.out.println(product.getProductName()+" успешно удален");
-                break;
-            }
-            System.out.println("Товар не найден");
+    public void removeProductShoppingCart(Product product, Warehouse warehouse){
+        if(warehouse.productSearch(product.getIdProduct())) {
+            getShoppingCart().getProductCart().remove(product);
+            System.out.println(product.getProductName()+" успешно удален");
+        }else {
+            System.out.println("Товар с таким артикулом на складе не найден");
         }
     }
 
-    public ProductHolder getProductHolder() {
-        return productHolder;
-    }
-
-    public void getShoppingCart() {
-        System.out.println(getProductCart());
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
     }
 }
