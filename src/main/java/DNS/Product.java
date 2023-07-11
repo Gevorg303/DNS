@@ -6,6 +6,7 @@ public class Product {
     private final String productName;
     private final String description;
     private final String idProduct;
+
     public Product(String productName, String description, String productNumber) {
         this.productName = productName;
         this.description = description;

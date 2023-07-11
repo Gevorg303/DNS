@@ -5,11 +5,11 @@ public class User {
     private String password;
     private ShoppingCart shoppingCart;
     private PurchaseHistory purchaseHistory;
-    public User(String phoneNumber, String password, ShoppingCart shoppingCart, PurchaseHistory purchaseHistory) {
+    public User(String phoneNumber, String password) {
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.shoppingCart = shoppingCart;
-        this.purchaseHistory=purchaseHistory;
+        this.shoppingCart = new ShoppingCart();
+        this.purchaseHistory = new PurchaseHistory();
     }
     @Override
     public String toString(){

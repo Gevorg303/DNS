@@ -11,15 +11,23 @@ public class Warehouse {
     }
     public void addProduct(Product product){/* добавить новый товар */
         getProducts().add(product);
-        System.out.println(product.getProductName()+" успешно добавлен");
+        System.out.println(product.getProductName()+" успешно добавлен на склад");
     }
-    public boolean productSearch(String idProduct){
+    public void removeProductWarehouse(Product product){
+        if(productSearch(product)!=null) {
+            getProducts().remove(product);
+            System.out.println(product.getProductName() + " успешно удален из склада");
+        }else {
+            System.out.println(product.getProductName() + " не найден в складе");
+        }
+    }
+    public Product productSearch(Product products){
         for (Product product: getProducts()) {
-            if (product.getIdProduct().equals(idProduct)){
-                return true;
+            if (product.getIdProduct().equals(products.getIdProduct())){
+                return product;
             }
         }
-        return false;
+        return null;
     }
     public List<Product> printListProduct(){/* вывести список товаров */
         return getProducts();
