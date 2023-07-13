@@ -32,9 +32,6 @@ public class Warehouse {
     public List<Product> printListProduct(){/* вывести список товаров */
         return getProducts();
     }
-    public Product printInfoProduct(Product product){/* вывести информацию об одном товаре */
-        return product;
-    }
     public List<Product> getProducts() {
         return products;
     }
