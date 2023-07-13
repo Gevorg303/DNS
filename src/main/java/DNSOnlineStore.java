@@ -10,6 +10,7 @@ public class DNSOnlineStore {
     private final PriceList discountedPriceList;
     private final PriceList regularPriceList;
     private final Calculator calculator;
+    private PurchaseService purchaseService;
 
     public DNSOnlineStore() {
         this.warehouse = new Warehouse();
@@ -19,8 +20,18 @@ public class DNSOnlineStore {
         this.shoppingCart = new ShoppingCart();
         this.userHolder = new UserHolder();
         this.calculator = new Calculator();
+        this.purchaseService = new PurchaseService();
 
     }
+
+    public PurchaseService getPurchaseService() {
+        return purchaseService;
+    }
+
+    public void setPurchaseService(PurchaseService purchaseService) {
+        this.purchaseService = purchaseService;
+    }
+
     public Warehouse getWarehouse() {
         return warehouse;
     }
@@ -100,5 +111,14 @@ public class DNSOnlineStore {
     }
     public void removeProduct(Product product1) {
         getWarehouse().removeProductWarehouse(product1);
+    }
+    public void addProductCartUser(User user, Product product, Warehouse warehouse) {
+        getPurchaseService().addToCart(user, product, warehouse);
+    }
+    public void removeProductCartUser(User user, Product product, Warehouse warehouse) {
+        getPurchaseService().removeFromCart(user, product, warehouse);
+    }
+    public void buyUser(User user, Product product, Warehouse warehouse) {
+        getPurchaseService().buyProductUser(user, product, warehouse);
     }
 }

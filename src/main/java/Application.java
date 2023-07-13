@@ -28,17 +28,26 @@ public class Application {
 
         System.out.println("---------------------Создать аккаунт-------------------");
         User user1 = new User("+7111", "12345");
+        User user2 = new User("+7222", "54321");
         dnsOnlineStore.addUser(user1);
 
-        System.out.println("---------------Добавить товар в корзину---------------");
-        dnsOnlineStore.addProductCart(product1, dnsOnlineStore.getWarehouse(), user1);
-        dnsOnlineStore.addProductCart(product2, dnsOnlineStore.getWarehouse(), user1);
-        dnsOnlineStore.addProductCart(product4, dnsOnlineStore.getWarehouse(), user1);
-        dnsOnlineStore.addProductCart(product3, dnsOnlineStore.getWarehouse(), user1);
+        System.out.println("---------------Добавление товара в корзину 1 пользователся---------------");
+        dnsOnlineStore.addProductCartUser(user1, product1, dnsOnlineStore.getWarehouse());
+        dnsOnlineStore.addProductCartUser(user1, product2, dnsOnlineStore.getWarehouse());
+        dnsOnlineStore.addProductCartUser(user1, product3, dnsOnlineStore.getWarehouse());
+        dnsOnlineStore.addProductCartUser(user1, product4, dnsOnlineStore.getWarehouse());
 
-        System.out.println("--------------------Товары в корзине------------------");
+        System.out.println("--------------------Товары в корзине у 1 пользователя------------------");
         List<Product> cartList = dnsOnlineStore.printCart(user1);
         System.out.println(cartList);
+
+        System.out.println("---------------Добавление товара в корзину 2 пользователся---------------");
+        dnsOnlineStore.addProductCartUser(user2, product3, dnsOnlineStore.getWarehouse());
+        dnsOnlineStore.addProductCartUser(user2, product2, dnsOnlineStore.getWarehouse());
+
+        System.out.println("--------------------Товары в корзине у 2 пользователя------------------");
+        List<Product> cartList2 = dnsOnlineStore.printCart(user2);
+        System.out.println(cartList2);
 
         System.out.println("-------------------Добавление товара в обычный прайс-лист--------------------");
         dnsOnlineStore.addProductRegularPriceList(new ProductPrice("12345", 12000));
@@ -47,23 +56,23 @@ public class Application {
         System.out.println("-------------------Добавление товара в прайс-лист со скидками --------------------");
         dnsOnlineStore.addProductDiscountedPriceList(new ProductPrice("13542", 8000));
 
-        System.out.println("-------------------Вычисляем сумму товаров в корзине, используя обычный прайс-лист--------------------");
-        double regularCartPrice = dnsOnlineStore.calculatorPrice(dnsOnlineStore.getRegularPriceList(), dnsOnlineStore.getShoppingCart(), user1);
+        System.out.println("-------------------Вычисляем сумму товаров в корзине у 1 пользователя, используя обычный прайс-лист--------------------");
+        double regularCartPriceSum = dnsOnlineStore.getPurchaseService().calculateRegularTotalPrice(user1, dnsOnlineStore.getRegularPriceList());
 
-        System.out.println("Стоимость товаров по обычному прайс листу: " + regularCartPrice);
+        System.out.println("Стоимость товаров по обычному прайс листу: " + regularCartPriceSum);
 
-        System.out.println("-------------------Вычисляем сумму товаров в корзине, используя прайс-лист со скидками--------------------");
-        double discountedCartPrice = dnsOnlineStore.getCalculator().calculateCartPrice(dnsOnlineStore.getDiscountedPriceList(), dnsOnlineStore.getShoppingCart(), user1);
-        System.out.println("Стоимость товаров по прайс листу со скидками: " + discountedCartPrice);
+        System.out.println("-------------------Вычисляем сумму товаров в корзине у 1 пользователя, используя прайс-лист со скидками--------------------");
+        double discountedCartPriceSum = dnsOnlineStore.getPurchaseService().calculateDiscountedTotalPrice(user1, dnsOnlineStore.getDiscountedPriceList());
+        System.out.println("Стоимость товаров по прайс листу со скидками: " + discountedCartPriceSum);
 
-        System.out.println("-----------------Удалить товар из корзины-------------");
-        dnsOnlineStore.removeProductCart(product2, user1);
+        System.out.println("-----------------Удалить товар из корзины 1 пользователя-------------");
+        dnsOnlineStore.removeProductCartUser(user1, product1, dnsOnlineStore.getWarehouse());
 
-        System.out.println("--------------------Товары в корзине-------------------");
+        System.out.println("--------------------Товары в корзине у 1 пользователя------------------");
         System.out.println(cartList);
 
         System.out.println("-----------------------Купить товар--------------------");
-        dnsOnlineStore.buy(product1, dnsOnlineStore.getWarehouse(), user1);
+        dnsOnlineStore.buyUser(user1, product1, dnsOnlineStore.getWarehouse());
 
         System.out.println("-------------------Список товаров--------------------");
         System.out.println(productList);
