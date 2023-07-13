@@ -57,12 +57,11 @@ public class Application {
         dnsOnlineStore.addProductDiscountedPriceList(new ProductPrice("13542", 8000));
 
         System.out.println("-------------------Вычисляем сумму товаров в корзине у 1 пользователя, используя обычный прайс-лист--------------------");
-        double regularCartPriceSum = dnsOnlineStore.getPurchaseService().calculateRegularTotalPrice(user1, dnsOnlineStore.getRegularPriceList());
-
+        double regularCartPriceSum = dnsOnlineStore.calculatorPriceUser(user1, dnsOnlineStore.getRegularPriceList());
         System.out.println("Стоимость товаров по обычному прайс листу: " + regularCartPriceSum);
 
         System.out.println("-------------------Вычисляем сумму товаров в корзине у 1 пользователя, используя прайс-лист со скидками--------------------");
-        double discountedCartPriceSum = dnsOnlineStore.getPurchaseService().calculateDiscountedTotalPrice(user1, dnsOnlineStore.getDiscountedPriceList());
+        double discountedCartPriceSum =  dnsOnlineStore.calculatorPriceUser(user1, dnsOnlineStore.getDiscountedPriceList());
         System.out.println("Стоимость товаров по прайс листу со скидками: " + discountedCartPriceSum);
 
         System.out.println("-----------------Удалить товар из корзины 1 пользователя-------------");

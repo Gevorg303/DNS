@@ -25,13 +25,8 @@ public class PurchaseService {
             System.out.println("Данный товар на складе не обнаружан");
         }
     }
-    public double calculateRegularTotalPrice(User user, PriceList regularPriceList) {
+    public double calculatePrice(User user, PriceList priceList) {
         Calculator calculator = new Calculator();
-        return calculator.calculateCartPrice(regularPriceList, user.getShoppingCart(), user);
-    }
-
-    public double calculateDiscountedTotalPrice(User user, PriceList discountedPriceList) {
-        Calculator calculator = new Calculator();
-        return calculator.calculateCartPrice(discountedPriceList, user.getShoppingCart(), user);
+        return calculator.calculateCartPrice(priceList, user.getShoppingCart(), user);
     }
 }

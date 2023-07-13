@@ -121,4 +121,7 @@ public class DNSOnlineStore {
     public void buyUser(User user, Product product, Warehouse warehouse) {
         getPurchaseService().buyProductUser(user, product, warehouse);
     }
+    public double calculatorPriceUser(User user, PriceList priceList) {
+        return getPurchaseService().calculatePrice(user, priceList);
+    }
 }
